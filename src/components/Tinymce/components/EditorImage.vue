@@ -1,6 +1,12 @@
 <template>
   <div class="upload-container">
-    <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary" @click=" dialogVisible=true">
+    <el-button
+      :style="{background:color,borderColor:color}"
+      icon="el-icon-upload"
+      size="mini"
+      type="primary"
+      @click=" dialogVisible=true"
+    >
       upload
     </el-button>
     <el-dialog :visible.sync="dialogVisible">
@@ -15,14 +21,20 @@
         action="https://httpbin.org/post"
         list-type="picture-card"
       >
-        <el-button size="small" type="primary">
+        <el-button
+          size="small"
+          type="primary"
+        >
           Click upload
         </el-button>
       </el-upload>
       <el-button @click="dialogVisible = false">
         Cancel
       </el-button>
-      <el-button type="primary" @click="handleSubmit">
+      <el-button
+        type="primary"
+        @click="handleSubmit"
+      >
         Confirm
       </el-button>
     </el-dialog>

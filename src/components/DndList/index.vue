@@ -1,25 +1,57 @@
 <template>
   <div class="dndList">
-    <div :style="{width:width1}" class="dndList-list">
+    <div
+      :style="{width:width1}"
+      class="dndList-list"
+    >
       <h3>{{ list1Title }}</h3>
-      <draggable :set-data="setData" :list="list1" group="article" class="dragArea">
-        <div v-for="element in list1" :key="element.id" class="list-complete-item">
+      <draggable
+        :set-data="setData"
+        :list="list1"
+        group="article"
+        class="dragArea"
+      >
+        <div
+          v-for="element in list1"
+          :key="element.id"
+          class="list-complete-item"
+        >
           <div class="list-complete-item-handle">
             {{ element.id }}[{{ element.author }}] {{ element.title }}
           </div>
           <div style="position:absolute;right:0px;">
-            <span style="float: right ;margin-top: -20px;margin-right:5px;" @click="deleteEle(element)">
-              <i style="color:#ff4949" class="el-icon-delete" />
+            <span
+              style="float: right ;margin-top: -20px;margin-right:5px;"
+              @click="deleteEle(element)"
+            >
+              <i
+                style="color:#ff4949"
+                class="el-icon-delete"
+              />
             </span>
           </div>
         </div>
       </draggable>
     </div>
-    <div :style="{width:width2}" class="dndList-list">
+    <div
+      :style="{width:width2}"
+      class="dndList-list"
+    >
       <h3>{{ list2Title }}</h3>
-      <draggable :list="list2" group="article" class="dragArea">
-        <div v-for="element in list2" :key="element.id" class="list-complete-item">
-          <div class="list-complete-item-handle2" @click="pushEle(element)">
+      <draggable
+        :list="list2"
+        group="article"
+        class="dragArea"
+      >
+        <div
+          v-for="element in list2"
+          :key="element.id"
+          class="list-complete-item"
+        >
+          <div
+            class="list-complete-item-handle2"
+            @click="pushEle(element)"
+          >
             {{ element.id }} [{{ element.author }}] {{ element.title }}
           </div>
         </div>
@@ -64,35 +96,41 @@ export default {
       default: '48%'
     }
   },
+  data: function() {
+    return {
+      mutableList1: this.list1,
+      mutableList2: this.list2
+    }
+  },
   methods: {
     isNotInList1(v) {
-      return this.list1.every(k => v.id !== k.id)
+      return this.mutableList1.every(k => v.id !== k.id)
     },
     isNotInList2(v) {
-      return this.list2.every(k => v.id !== k.id)
+      return this.mutableList2.every(k => v.id !== k.id)
     },
     deleteEle(ele) {
-      for (const item of this.list1) {
+      for (const item of this.mutableList1) {
         if (item.id === ele.id) {
-          const index = this.list1.indexOf(item)
-          this.list1.splice(index, 1)
+          const index = this.mutableList1.indexOf(item)
+          this.mutableList1.splice(index, 1)
           break
         }
       }
       if (this.isNotInList2(ele)) {
-        this.list2.unshift(ele)
+        this.mutableList2.unshift(ele)
       }
     },
     pushEle(ele) {
-      for (const item of this.list2) {
+      for (const item of this.mutableList2) {
         if (item.id === ele.id) {
-          const index = this.list2.indexOf(item)
-          this.list2.splice(index, 1)
+          const index = this.mutableList2.indexOf(item)
+          this.mutableList2.splice(index, 1)
           break
         }
       }
       if (this.isNotInList1(ele)) {
-        this.list1.push(ele)
+        this.mutableList1.push(ele)
       }
     },
     setData(dataTransfer) {

@@ -1,5 +1,12 @@
 <template>
-  <el-select ref="dragSelect" v-model="selectVal" v-bind="$attrs" class="drag-select" multiple v-on="$listeners">
+  <el-select
+    ref="dragSelect"
+    v-model="selectVal"
+    v-bind="$attrs"
+    class="drag-select"
+    multiple
+    v-on="$listeners"
+  >
     <slot />
   </el-select>
 </template>
@@ -15,10 +22,15 @@ export default {
       required: true
     }
   },
+  data: function() {
+    return {
+      mutableValue: this.value
+    }
+  },
   computed: {
     selectVal: {
       get() {
-        return [...this.value]
+        return [...this.mutablevalue]
       },
       set(val) {
         this.$emit('input', [...val])
@@ -39,8 +51,8 @@ export default {
           // Detail see : https://github.com/RubaXa/Sortable/issues/1012
         },
         onEnd: evt => {
-          const targetRow = this.value.splice(evt.oldIndex, 1)[0]
-          this.value.splice(evt.newIndex, 0, targetRow)
+          const targetRow = this.mutableValue.splice(evt.oldIndex, 1)[0]
+          this.mutableValue.splice(evt.newIndex, 0, targetRow)
         }
       })
     }

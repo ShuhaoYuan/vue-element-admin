@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
     sourceType: 'module'
   },
   env: {
@@ -17,14 +17,54 @@ module.exports = {
     "vue/max-attributes-per-line": [2, {
       "singleline": 10,
       "multiline": {
-        "max": 1,
-        "allowFirstLine": false
+        "max": 1
       }
     }],
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline":"off",
     "vue/name-property-casing": ["error", "PascalCase"],
     "vue/no-v-html": "off",
+    "vue/multi-word-component-names": ["off", {
+      "ignores": [
+        'Theme', 
+        'Tab', 
+        'index', 
+        'Search', 
+        'Compare', 
+        'upload', 
+        'Profile', 
+        'Timeline', 
+        'Activity', 
+        'role', 
+        'download', 
+        'Account',
+        'Orders',
+        'Login',
+        'Icons',
+        'Guide',
+        'Warning',
+        'Platform',
+        'Comment',
+        'Page404',
+        'Page401',
+        'Documentation',
+        'Dashboard',
+        'Todo',
+        'Category',
+        'Layout',
+        'Tinymce',
+        'Navbar',
+        'Mallki',
+        'Link',
+        'Sticky',
+        'Screenfull',
+        'Pagination',
+        'Hamburger'
+      ]
+     }],
+     "vue/no-unused-components": ["off", {
+       "ignoreWhenBindingPresent": true
+     }],
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
       'before': true,
